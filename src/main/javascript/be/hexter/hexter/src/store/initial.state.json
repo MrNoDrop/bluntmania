@@ -1,0 +1,41 @@
+{
+  "state": {
+    "fingerprint": null,
+    "context2D": null,
+    "form": {
+      "forgot": {
+        "email": "",
+        "recoveryToken": "",
+        "password": "",
+        "repassword": "",
+        "errors1": {},
+        "errors2": {}
+      },
+      "login": { "email": "", "password": "", "errors": {} },
+      "register": {
+        "firstname": "",
+        "lastname": "",
+        "email": "",
+        "password": "",
+        "repassword": "",
+        "errors": {},
+        "undirtyFormAllowed": true
+      }
+    },
+    "cookie": {
+      "CSRF-TOKEN": null,
+      "authentication-token": null
+    },
+    "window": {
+      "inner": null,
+      "outer": null
+    },
+    "updateTick": 0
+  },
+  "router": {
+    "pathname": "/",
+    "search": "",
+    "queries": {},
+    "hash": ""
+  }
+}
