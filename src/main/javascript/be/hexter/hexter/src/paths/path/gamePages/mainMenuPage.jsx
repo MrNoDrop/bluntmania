@@ -1,10 +1,11 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { push } from "redux-first-routing";
 import { useNavigate } from "react-router-dom";
 import Title from "../../../gfx/mainMenuPage/title";
 import useHowl from "../../../hooks/useHowl";
-import Play from "../../../gfx/mainMenuPage/button/play";
+import Button from "../../../gfx/ui/button";
+import { vmin } from "../../../tools/vScale";
 
 const mapStateToProps = ({ state }) => ({
   ctx: state.context2D,
@@ -32,7 +33,25 @@ function MainMenuPage({ registerLoadCTX, ctx, updateTick, windowSize }) {
   return (
     <>
       <Title title="Blunt Mania" />
-      <Play />
+      <Button
+        font="papercut-regular"
+        fontSize={10}
+        text="play"
+        defaultColor="grey"
+        hoverColor="green"
+        x={windowSize.width / 2 - vmin(14)}
+        y={vmin(40)}
+      />
+      <Button
+        font="papercut-regular"
+        fontSize={10}
+        text="log-out"
+        defaultColor="grey"
+        hoverColor="red"
+        x={windowSize.width - vmin(36)}
+        y={windowSize.height - vmin(12)}
+        onClick={'document.cookie = "authentication-token=null"'}
+      />
     </>
   );
 }

@@ -20,13 +20,13 @@ function Title({ title, ctx, updateTick, windowSize }) {
         ctx.fillStyle = "white";
         break;
       case 0:
-        ctx.fillStyle = "red";
+        ctx.fillStyle = "green";
         break;
       case 1:
         ctx.fillStyle = "yellow";
         break;
       case 2:
-        ctx.fillStyle = "green";
+        ctx.fillStyle = "red";
         break;
     }
     ctx.fillText(
