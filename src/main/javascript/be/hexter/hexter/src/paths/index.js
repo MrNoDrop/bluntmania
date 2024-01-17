@@ -1,11 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Route, Routes } from "react-router-dom";
-import LandingPage from "./path/landingPage";
+import GamePage from "./path/gamePage";
 import LoginPage from "./path/loginPage";
 import RegisterPage from "./path/registerPage";
 import Redirect from "../components/redirect";
 import ForgotPasswordPage from "../paths/path/forgotPasswordPage";
+import MainMenuPage from "./path/gamePages/mainMenuPage";
 // import UserSearch from "../components/userSearch";
 
 const mapStateToProps = ({ state }) => ({
@@ -15,12 +16,15 @@ const mapStateToProps = ({ state }) => ({
 function Paths({ authenticationToken }) {
   return (
     <>
-      {/* {authenticationToken && <UserSearch />} */}
       <Routes>
         {authenticationToken && (
           <>
-            <Route path="/" exact element={<LandingPage />} />
-            <Route path="/:name" exact element={<Redirect path="/" />} />
+            <Route path="/" element={<GamePage />} />
+            <Route
+              path="/main-menu"
+              element={[<GamePage />, <MainMenuPage />]}
+            />
+            <Route path="/:name" element={<Redirect path="/" />} />
           </>
         )}
         ||
@@ -35,7 +39,7 @@ function Paths({ authenticationToken }) {
               exact
               element={<ForgotPasswordPage />}
             />
-            <Route path="/:name" exact element={<Redirect path="/login" />} />
+            <Route path="/:name" element={<Redirect path="/login" />} />
           </>
         )}
       </Routes>

@@ -4,7 +4,7 @@ import bindHistoryListener from "./listener/history";
 import bindUpdateTickListener from "./listener/updateTick";
 import bindWindowListeners from "./listener/window";
 
-const loop = (func) => setInterval(func, 100);
+const loop = (func) => setInterval(func, 0.01);
 
 const storeListeners = (store) => {
   bindHistoryListener(store);
