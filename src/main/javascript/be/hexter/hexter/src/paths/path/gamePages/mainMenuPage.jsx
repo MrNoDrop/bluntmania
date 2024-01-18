@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Title from "../../../gfx/mainMenuPage/title";
 import Button from "../../../gfx/ui/button";
 import { vmin } from "../../../tools/vScale";
-import ParallaxBackgound from "../../../gfx/ui/parallax/backgound";
+import ParallaxBackground from "../../../gfx/ui/parallax/background";
 
 const mapStateToProps = ({ state }) => ({
   ctx: state.context2D,
@@ -28,13 +28,28 @@ function MainMenuPage({ ctx, updateTick, windowSize }) {
   }, [ctx, navigateTo, updateTick, windowSize]);
   return (
     <>
-      <ParallaxBackgound
+      <ParallaxBackground
         image="http://localhost:8080/rsc/parallax/forest/layer_01.png"
+        direction="left"
+      />
+      <ParallaxBackground
+        image="http://localhost:8080/rsc/parallax/forest/layer_02.png"
         direction="right"
       />
-      <ParallaxBackgound
-        image="http://localhost:8080/rsc/parallax/forest/layer_02.png"
-        direction="left"
+      <ParallaxBackground
+        image="http://localhost:8080/rsc/parallax/forest/layer_03.png"
+        direction="right"
+        speed={2}
+      />
+      <ParallaxBackground
+        image="http://localhost:8080/rsc/parallax/forest/layer_04.png"
+        direction="right"
+        speed={3}
+      />
+      <ParallaxBackground
+        image="http://localhost:8080/rsc/parallax/forest/layer_05.png"
+        direction="right"
+        speed={3}
       />
       <Title title="Blunt Mania" />
       <Button

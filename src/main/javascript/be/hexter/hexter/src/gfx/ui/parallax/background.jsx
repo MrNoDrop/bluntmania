@@ -7,7 +7,14 @@ const mapStateToProps = ({ state }) => ({
   windowSize: state.window.inner,
 });
 
-function ParallaxBackgound({ ctx, updateTick, windowSize, image, direction }) {
+function ParallaxBackground({
+  ctx,
+  updateTick,
+  windowSize,
+  image,
+  direction,
+  speed = 1,
+}) {
   const [imageDimension, setImageDimension] = useState({ width: 0, height: 0 });
   const [loadedImage, setLoadedImage] = useState(undefined);
   const [offset, setOffset] = useState(
@@ -22,7 +29,7 @@ function ParallaxBackgound({ ctx, updateTick, windowSize, image, direction }) {
     setLoadedImage(img);
   }, [ctx, image]);
   useEffect(() => {
-    setOffset(direction === "right" ? offset + 1 : offset - 1);
+    setOffset(direction === "right" ? offset + speed : offset - speed);
     if (loadedImage) {
       ctx.drawImage(
         loadedImage,
@@ -55,4 +62,4 @@ function ParallaxBackgound({ ctx, updateTick, windowSize, image, direction }) {
   return <></>;
 }
 
-export default connect(mapStateToProps)(ParallaxBackgound);
+export default connect(mapStateToProps)(ParallaxBackground);
