@@ -31,11 +31,8 @@ function GamePage({
   const navigateTo = useNavigate();
   const canvasRef = useRef(undefined);
   useEffect(() => {
-    console.log(window.location.pathname);
-    if (!context2D) {
-      const context2D_ = canvasRef.current.getContext("2d");
-      setContext2D(context2D_);
-    }
+    const context2D_ = canvasRef.current.getContext("2d");
+    setContext2D(context2D_);
     if (window.location.pathname === "/") {
       navigateTo("/main-menu");
     }
