@@ -2,8 +2,8 @@ import React, { useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import useCheckAuthenticationToken from "../../hooks/useCheckAuthenticationToken";
 import setCanvasContext2D from "../../store/actions/set/canvas/context2D";
-import { push } from "redux-first-routing";
 import { useNavigate } from "react-router-dom";
+import useHowl from "../../hooks/useHowl";
 
 const mapStateToProps = ({ state }) => ({
   csrfToken: state.cookie.csrfToken,
@@ -16,7 +16,6 @@ const mapStateToProps = ({ state }) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   setContext2D: (context2D) => dispatch(setCanvasContext2D(context2D)),
-  registerGoToMainMenuPage: () => dispatch(push("/main-menu")),
 });
 
 function GamePage({
@@ -26,19 +25,22 @@ function GamePage({
   csrfToken,
   fingerprint,
   authenticationToken,
-  registerGoToMainMenuPage,
   updateTick,
 }) {
   useCheckAuthenticationToken(csrfToken, fingerprint, authenticationToken);
   const navigateTo = useNavigate();
   const canvasRef = useRef(undefined);
   useEffect(() => {
-    if (context2D) return;
-    const context2D_ = canvasRef.current.getContext("2d");
-    setContext2D(context2D_);
-    registerGoToMainMenuPage();
-    navigateTo("/main-menu");
-  }, [setContext2D, canvasRef, registerGoToMainMenuPage, navigateTo]);
+    console.log(window.location.pathname);
+    if (!context2D) {
+      const context2D_ = canvasRef.current.getContext("2d");
+      setContext2D(context2D_);
+    }
+    if (window.location.pathname === "/") {
+      navigateTo("/main-menu");
+    }
+  }, [setContext2D, context2D, canvasRef, navigateTo]);
+  useHowl("http://localhost:8080/rsc/sounds/background/happy.wav", true);
   return (
     <>
       <canvas
