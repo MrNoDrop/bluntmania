@@ -47,7 +47,7 @@ function ParallaxBackgound({ ctx, updateTick, windowSize, image, direction }) {
         windowSize.height
       );
     }
-    if (offset > windowSize.width) {
+    if (offset > windowSize.width || offset < 0) {
       setOffset(direction === "right" ? 0 : windowSize.width);
     }
   }, [loadedImage, updateTick, ctx]);
