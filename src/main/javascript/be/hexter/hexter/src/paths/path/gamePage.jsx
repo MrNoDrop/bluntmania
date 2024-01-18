@@ -11,6 +11,7 @@ const mapStateToProps = ({ state }) => ({
   authenticationToken: state.cookie["authentication-token"],
   innerWindow: state.window.inner,
   updateTick: state.updateTick,
+  context2D: state.context2D,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -19,6 +20,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 function GamePage({
+  context2D,
   setContext2D,
   innerWindow,
   csrfToken,
@@ -31,8 +33,9 @@ function GamePage({
   const navigateTo = useNavigate();
   const canvasRef = useRef(undefined);
   useEffect(() => {
-    const context2D = canvasRef.current.getContext("2d");
-    setContext2D(context2D);
+    if (context2D) return;
+    const context2D_ = canvasRef.current.getContext("2d");
+    setContext2D(context2D_);
     registerGoToMainMenuPage();
     navigateTo("/main-menu");
   }, [setContext2D, canvasRef, registerGoToMainMenuPage, navigateTo]);

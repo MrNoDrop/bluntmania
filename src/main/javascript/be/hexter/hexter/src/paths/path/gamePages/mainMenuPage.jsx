@@ -19,6 +19,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 function MainMenuPage({ registerLoadCTX, ctx, updateTick, windowSize }) {
   const navigateTo = useNavigate();
+  window.navigateTo = navigateTo;
   useEffect(() => {
     if (ctx === null) {
       registerLoadCTX();
@@ -41,6 +42,7 @@ function MainMenuPage({ registerLoadCTX, ctx, updateTick, windowSize }) {
         hoverColor="green"
         x={windowSize.width / 2 - vmin(14)}
         y={vmin(40)}
+        onClick={"window.navigateTo('/choose-level')"}
       />
       <Button
         font="papercut-regular"

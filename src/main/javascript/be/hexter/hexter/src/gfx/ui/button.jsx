@@ -26,6 +26,7 @@ function Button({
   onClick,
   fontSize,
   font,
+  clickSound,
 }) {
   const [mouseEntered, setMouseEntered] = useState(false);
   const [mouseExited, setMouseExited] = useState(false);
@@ -75,6 +76,13 @@ function Button({
   useEffect(() => {
     const func = () => {
       if (mouseEntered) {
+        new Howl({
+          src: [
+            clickSound ||
+              "http://localhost:8080/rsc/sounds/buttons/onClick.wav",
+          ],
+          autoplay: true,
+        });
         eval(onClick);
       }
     };
