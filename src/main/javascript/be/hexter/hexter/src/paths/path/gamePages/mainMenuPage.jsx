@@ -28,7 +28,14 @@ function MainMenuPage({ ctx, updateTick, windowSize }) {
   }, [ctx, navigateTo, updateTick, windowSize]);
   return (
     <>
-      <ParallaxBackgound image="http://localhost:8080/rsc/parallax/forest/layer_02.png" />
+      <ParallaxBackgound
+        image="http://localhost:8080/rsc/parallax/forest/layer_01.png"
+        direction="right"
+      />
+      <ParallaxBackgound
+        image="http://localhost:8080/rsc/parallax/forest/layer_02.png"
+        direction="left"
+      />
       <Title title="Blunt Mania" />
       <Button
         font="papercut-regular"
