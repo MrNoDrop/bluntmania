@@ -4,7 +4,7 @@ const updateTickListener = ({ getState, dispatch }) => {
   const {
     state: { updateTick: updateTickCount },
   } = getState();
-  if (updateTickCount === 10) {
+  if (updateTickCount >= 1) {
     dispatch(updateTick(0));
   } else {
     dispatch(updateTick(updateTickCount + 1));
