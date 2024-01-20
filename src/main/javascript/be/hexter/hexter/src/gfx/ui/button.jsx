@@ -97,7 +97,7 @@ function Button({
     };
   }, [updateTick, disabled, mouseEntered, clickSound, onClick]);
   useEffect(() => {
-    if (mouseEntered || mouseExited) {
+    if (!disabled && (mouseEntered || mouseExited)) {
       new Howl({
         src: ["/rsc/sounds/buttons/hovering.wav"],
         autoplay: true,
