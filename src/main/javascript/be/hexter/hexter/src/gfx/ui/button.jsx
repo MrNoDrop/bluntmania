@@ -81,7 +81,7 @@ function Button({
   }, [updateTick]);
   useEffect(() => {
     const func = () => {
-      if (mouseEntered) {
+      if (!disabled && mouseEntered) {
         new Howl({
           src: [clickSound || "/rsc/sounds/buttons/onClick.wav"],
           autoplay: true,
