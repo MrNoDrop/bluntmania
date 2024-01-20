@@ -63,6 +63,16 @@ function MainMenuPage({ ctx, updateTick, windowSize }) {
       <Button
         font="papercut-regular"
         fontSize={10}
+        text="settings"
+        defaultColor="grey"
+        hoverColor="yellow"
+        x={windowSize.width / 2 - vmin(21)}
+        y={vmin(55)}
+        onClick={"navigateTo('/settings')"}
+      />
+      <Button
+        font="papercut-regular"
+        fontSize={10}
         text="log-out"
         defaultColor="grey"
         hoverColor="red"
