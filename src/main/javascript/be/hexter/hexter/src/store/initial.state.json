@@ -2,6 +2,7 @@
   "state": {
     "fingerprint": null,
     "context2D": null,
+    "backgroundSound": null,
     "form": {
       "forgot": {
         "email": "",
