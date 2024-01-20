@@ -10,11 +10,9 @@ const mapStateToProps = ({ state }) => ({
   windowSize: state.window.inner,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  registerLoadCTX: () => dispatch(push("/")),
-});
+const mapDispatchToProps = (dispatch) => ({});
 
-function ChooseLevelPage({ registerLoadCTX, ctx, updateTick, windowSize }) {
+function ChooseLevelPage({ ctx, updateTick, windowSize }) {
   const navigateTo = useNavigate();
   useEffect(() => {
     if (!ctx) {
@@ -22,7 +20,7 @@ function ChooseLevelPage({ registerLoadCTX, ctx, updateTick, windowSize }) {
     } else {
       ctx.clearRect(0, 0, windowSize.width, windowSize.height);
     }
-  }, [ctx, registerLoadCTX, navigateTo, updateTick, windowSize]);
+  }, [ctx, navigateTo, updateTick, windowSize]);
   return (
     <>
       <Title />
