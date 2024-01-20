@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { vmin } from "../../tools/vScale";
 import { connect } from "react-redux";
-import "./title.scss";
+import "./rastaText.scss";
 
 const mapStateToProps = ({ state }) => ({
   ctx: state.context2D,
@@ -11,11 +11,11 @@ const mapStateToProps = ({ state }) => ({
 
 const mapDispatchToProps = (dispatch) => ({});
 
-function Title({ title, ctx, updateTick, windowSize }) {
-  const [titleColor, setTitleColor] = useState(0);
+function RastaText({ text, x, y, ctx, updateTick, windowSize }) {
+  const [textColor, setTextColor] = useState(0);
   useEffect(() => {
     ctx.font = "15vmin fippsregular";
-    switch (titleColor) {
+    switch (textColor) {
       default:
         ctx.fillStyle = "white";
         break;
@@ -29,21 +29,17 @@ function Title({ title, ctx, updateTick, windowSize }) {
         ctx.fillStyle = "red";
         break;
     }
-    ctx.fillText(
-      title,
-      windowSize.width / 2 - ctx.measureText(title).width / 2,
-      vmin(30)
-    );
+    ctx.fillText(text, x, y);
   }, [ctx, updateTick, windowSize]);
   useEffect(() => {
     const interval = setInterval(() => {
-      setTitleColor(titleColor + 1 >= 3 ? 0 : titleColor + 1);
+      setTextColor(textColor + 1 >= 3 ? 0 : textColor + 1);
     }, 1000);
     return () => {
       clearInterval(interval);
     };
-  }, [titleColor]);
+  }, [textColor]);
   return <></>;
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Title);
+export default connect(mapStateToProps, mapDispatchToProps)(RastaText);
