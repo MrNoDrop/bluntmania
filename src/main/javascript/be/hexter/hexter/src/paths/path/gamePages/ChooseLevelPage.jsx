@@ -53,6 +53,19 @@ function ChooseLevelPage({ ctx, updateTick, windowSize }) {
         onClick={"navigateTo('/choose-level/level-1')"}
         rectangleYOffset={-2.3}
       />
+      <Button
+        font="arcade-regular"
+        fontSize={10}
+        text="Level 2"
+        defaultColor="grey"
+        hoverColor="green"
+        x={vmin(60)}
+        y={vmin(30)}
+        onClick={"navigateTo('/choose-level/level-1')"}
+        rectangleYOffset={-2.3}
+        disabled={true}
+        disabledColor="red"
+      />
     </>
   );
 }

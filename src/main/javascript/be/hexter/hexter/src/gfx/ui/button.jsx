@@ -45,10 +45,10 @@ function Button({
   );
   useEffect(() => {
     ctx.font = `${fontSize}vmin ${font}`;
-    if (mouseEntered) {
-      ctx.fillStyle = hoverColor;
-    } else if (disabled) {
+    if (disabled) {
       ctx.fillStyle = disabledColor;
+    } else if (mouseEntered) {
+      ctx.fillStyle = hoverColor;
     } else {
       ctx.fillStyle = defaultColor;
     }
@@ -83,10 +83,7 @@ function Button({
     const func = () => {
       if (mouseEntered) {
         new Howl({
-          src: [
-            clickSound ||
-              "http://localhost:8080/rsc/sounds/buttons/onClick.wav",
-          ],
+          src: [clickSound || "/rsc/sounds/buttons/onClick.wav"],
           autoplay: true,
         });
         if (!disabled) {
@@ -98,11 +95,11 @@ function Button({
     return () => {
       window.removeEventListener("click", func);
     };
-  }, [updateTick]);
+  }, [updateTick, disabled, mouseEntered, clickSound, onClick]);
   useEffect(() => {
     if (mouseEntered || mouseExited) {
       new Howl({
-        src: ["http://localhost:8080/rsc/sounds/buttons/hovering.wav"],
+        src: ["/rsc/sounds/buttons/hovering.wav"],
         autoplay: true,
       });
     }
