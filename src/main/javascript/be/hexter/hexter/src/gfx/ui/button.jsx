@@ -27,13 +27,15 @@ function Button({
   fontSize,
   font,
   clickSound,
+  rectangleXOffset = 0,
+  rectangleYOffset = 0,
 }) {
   const [mouseEntered, setMouseEntered] = useState(false);
   const [mouseExited, setMouseExited] = useState(false);
   const [rectangle, setRectangle] = useState(
     new Rectangle(
-      x,
-      y + vmin(fontSize / 10),
+      x + vmin(rectangleXOffset),
+      y + vmin(fontSize / 10) + vmin(rectangleYOffset),
       ctx.measureText(text).width + vmin(1),
       ctx.measureText(text).actualBoundingBoxAscent +
         ctx.measureText(text).actualBoundingBoxDescent
@@ -55,8 +57,8 @@ function Button({
     );
     setRectangle(
       new Rectangle(
-        x,
-        y + vmin(fontSize / 10),
+        x + vmin(rectangleXOffset),
+        y + vmin(fontSize / 10) + vmin(rectangleYOffset),
         ctx.measureText(text).width,
         ctx.measureText(text).actualBoundingBoxAscent +
           ctx.measureText(text).actualBoundingBoxDescent

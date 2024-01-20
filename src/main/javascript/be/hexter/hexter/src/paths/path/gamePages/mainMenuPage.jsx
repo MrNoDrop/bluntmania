@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import Title from "../../../gfx/mainMenuPage/title";
 import Button from "../../../gfx/ui/button";
 import { vmin } from "../../../tools/vScale";
 import ParallaxBackground from "../../../gfx/ui/parallax/background";
+import Title from "../../../gfx/ui/RastaText";
 
 const mapStateToProps = ({ state }) => ({
   ctx: state.context2D,
@@ -27,29 +27,33 @@ function MainMenuPage({ ctx, updateTick, windowSize }) {
   return (
     <>
       <ParallaxBackground
-        image="http://localhost:8080/rsc/parallax/forest/layer_01.png"
+        image="/rsc/parallax/forest/layer_01.png"
         direction="left"
       />
       <ParallaxBackground
-        image="http://localhost:8080/rsc/parallax/forest/layer_02.png"
+        image="/rsc/parallax/forest/layer_02.png"
         direction="right"
       />
       <ParallaxBackground
-        image="http://localhost:8080/rsc/parallax/forest/layer_03.png"
+        image="/rsc/parallax/forest/layer_03.png"
         direction="right"
         speed={2}
       />
       <ParallaxBackground
-        image="http://localhost:8080/rsc/parallax/forest/layer_04.png"
+        image="/rsc/parallax/forest/layer_04.png"
         direction="right"
         speed={3}
       />
       <ParallaxBackground
-        image="http://localhost:8080/rsc/parallax/forest/layer_05.png"
+        image="/rsc/parallax/forest/layer_05.png"
         direction="right"
         speed={3}
       />
-      <Title title="Blunt Mania" />
+      <Title
+        text="Blunt Mania"
+        x={windowSize.width / 2 - vmin(72.5)}
+        y={vmin(30)}
+      />
       <Button
         font="papercut-regular"
         fontSize={10}
@@ -66,7 +70,7 @@ function MainMenuPage({ ctx, updateTick, windowSize }) {
         text="settings"
         defaultColor="grey"
         hoverColor="yellow"
-        x={windowSize.width / 2 - vmin(21)}
+        x={windowSize.width / 2 - vmin(22)}
         y={vmin(55)}
         onClick={"navigateTo('/settings')"}
       />

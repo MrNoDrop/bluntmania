@@ -40,10 +40,7 @@ function GamePage({
       navigateTo("/main-menu");
     }
   }, [setContext2D, context2D, canvasRef, navigateTo]);
-  const backgroundSound = useHowl(
-    "http://localhost:8080/rsc/sounds/background/happy.wav",
-    true
-  );
+  const backgroundSound = useHowl("/rsc/sounds/background/happy.wav", true);
   useEffect(() => {
     setBackgroundSoundController(backgroundSound);
   }, [backgroundSound]);
