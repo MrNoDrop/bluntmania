@@ -8,6 +8,7 @@ import Redirect from "../components/redirect";
 import ForgotPasswordPage from "../paths/path/forgotPasswordPage";
 import MainMenuPage from "./path/gamePages/mainMenuPage";
 import ChooseLevelPage from "./path/gamePages/ChooseLevelPage";
+import SettingsPage from "./path/gamePages/SettingsPage";
 // import UserSearch from "../components/userSearch";
 
 const mapStateToProps = ({ state }) => ({
@@ -28,6 +29,10 @@ function Paths({ authenticationToken }) {
             <Route
               path="/choose-level"
               element={[<GamePage />, <ChooseLevelPage />]}
+            />
+            <Route
+              path="/settings"
+              element={[<GamePage />, <SettingsPage />]}
             />
             <Route path="/:name" element={<Redirect path="/" />} />
           </>
