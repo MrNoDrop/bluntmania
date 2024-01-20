@@ -51,7 +51,7 @@ function ChooseLevelPage({ ctx, updateTick, windowSize }) {
         x={vmin(20)}
         y={vmin(30)}
         onClick={"navigateTo('/choose-level/level-1')"}
-        rectangleYOffset={-2.5}
+        rectangleYOffset={-2.3}
       />
     </>
   );
