@@ -21,6 +21,7 @@ function Button({
   windowSize,
   defaultColor,
   hoverColor,
+  disabledColor,
   x,
   y,
   onClick,
@@ -29,6 +30,7 @@ function Button({
   clickSound,
   rectangleXOffset = 0,
   rectangleYOffset = 0,
+  disabled = false,
 }) {
   const [mouseEntered, setMouseEntered] = useState(false);
   const [mouseExited, setMouseExited] = useState(false);
@@ -45,6 +47,8 @@ function Button({
     ctx.font = `${fontSize}vmin ${font}`;
     if (mouseEntered) {
       ctx.fillStyle = hoverColor;
+    } else if (disabled) {
+      ctx.fillStyle = disabledColor;
     } else {
       ctx.fillStyle = defaultColor;
     }
@@ -85,7 +89,9 @@ function Button({
           ],
           autoplay: true,
         });
-        eval(onClick);
+        if (!disabled) {
+          eval(onClick);
+        }
       }
     };
     window.addEventListener("click", func);
