@@ -4,6 +4,7 @@ import useCheckAuthenticationToken from "../../hooks/useCheckAuthenticationToken
 import setCanvasContext2D from "../../store/actions/set/canvas/context2D";
 import { useNavigate } from "react-router-dom";
 import useHowl from "../../hooks/useHowl";
+import setBackgroundSoundController from "../../store/actions/set/controller/backgroundSound";
 
 const mapStateToProps = ({ state }) => ({
   csrfToken: state.cookie.csrfToken,
@@ -16,6 +17,8 @@ const mapStateToProps = ({ state }) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   setContext2D: (context2D) => dispatch(setCanvasContext2D(context2D)),
+  setBackgroundSoundController: (sound) =>
+    dispatch(setBackgroundSoundController(sound)),
 });
 
 function GamePage({
@@ -37,7 +40,13 @@ function GamePage({
       navigateTo("/main-menu");
     }
   }, [setContext2D, context2D, canvasRef, navigateTo]);
-  useHowl("http://localhost:8080/rsc/sounds/background/happy.wav", true);
+  const backgroundSound = useHowl(
+    "http://localhost:8080/rsc/sounds/background/happy.wav",
+    true
+  );
+  useEffect(() => {
+    setBackgroundSoundController(backgroundSound);
+  }, [backgroundSound]);
   return (
     <>
       <canvas
