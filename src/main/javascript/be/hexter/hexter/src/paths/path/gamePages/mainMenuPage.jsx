@@ -21,9 +21,7 @@ function MainMenuPage({ ctx, updateTick, windowSize }) {
     if (!ctx) {
       navigateTo("/");
     } else {
-      ctx.fillStyle = "blue";
-      ctx.rect(0, 0, windowSize.width, windowSize.height);
-      ctx.fill();
+      ctx.clearRect(0, 0, windowSize.width, windowSize.height);
     }
   }, [ctx, navigateTo, updateTick, windowSize]);
   return (
