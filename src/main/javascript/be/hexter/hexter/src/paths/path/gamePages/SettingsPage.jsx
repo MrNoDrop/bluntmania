@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Button from "../../../gfx/ui/button";
@@ -45,6 +45,9 @@ function SettingsPage({
       ctx.clearRect(0, 0, windowSize.width, windowSize.height);
     }
   }, [ctx, navigateTo, updateTick, windowSize]);
+  useEffect(() => {
+    backgroundSoundController.volume(backgroundSoundControllerVolume);
+  }, [backgroundSoundController, backgroundSoundControllerVolume]);
   return (
     <>
       <RastaText text="Settings" x={vmin(5)} y={windowSize.height - vmin(10)} />
@@ -71,11 +74,16 @@ function SettingsPage({
         y={10}
         savedVolume={backgroundSoundControllerVolume}
         getSavedVolume={setBackgroundSoundControllerVolume}
-        sound={backgroundSoundController}
         initMuted={backgroundSoundControllerMuted}
         getMuted={setBackgroundSoundControllerMuted}
       />
-      <HorizontalSlider width={50} x={15} y={13.5} />
+      <HorizontalSlider
+        width={650}
+        x={15}
+        y={13.5}
+        value={backgroundSoundControllerVolume}
+        getValue={setBackgroundSoundControllerVolume}
+      />
     </>
   );
 }
