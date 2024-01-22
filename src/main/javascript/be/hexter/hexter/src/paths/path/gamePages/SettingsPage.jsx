@@ -70,17 +70,17 @@ function SettingsPage({
         y={vmin(10)}
       />
       <MuteButton
-        x={5.0}
-        y={10}
+        x={68.0}
+        y={3.4}
         savedVolume={backgroundSoundControllerVolume}
         getSavedVolume={setBackgroundSoundControllerVolume}
         initMuted={backgroundSoundControllerMuted}
         getMuted={setBackgroundSoundControllerMuted}
       />
       <HorizontalSlider
-        width={650}
-        x={15}
-        y={13.5}
+        width={vmin(58)}
+        x={5}
+        y={12}
         value={backgroundSoundControllerVolume}
         getValue={setBackgroundSoundControllerVolume}
       />
