@@ -2,7 +2,9 @@
   "state": {
     "fingerprint": null,
     "context2D": null,
-    "backgroundSound": null,
+    "backgroundSoundController": null,
+    "backgroundSoundControllerMuted": false,
+    "backgroundSoundControllerVolume": 1.0,
     "form": {
       "forgot": {
         "email": "",

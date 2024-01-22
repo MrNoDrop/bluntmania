@@ -4,7 +4,6 @@ import { push } from "redux-first-routing";
 import { vmin } from "../../tools/vScale";
 import { Rectangle } from "../../tools/rectangle";
 import { Howl } from "howler";
-import "./button.scss";
 
 const mapStateToProps = ({ state }) => ({
   ctx: state.context2D,

@@ -4,16 +4,38 @@ import { useNavigate } from "react-router-dom";
 import Button from "../../../gfx/ui/button";
 import RastaText from "../../../gfx/ui/RastaText";
 import { vmin } from "../../../tools/vScale";
+import Text from "../../../gfx/ui/text";
+import MuteButton from "../../../gfx/ui/muteButton";
+import setBackgroundSoundControllerMuted from "../../../store/actions/set/controller/backgroundSoundMuted";
+import setBackgroundSoundControllerVolume from "../../../store/actions/set/controller/backgroundSoundVolume";
+import HorizontalSlider from "../../../gfx/ui/slider/horizontal";
 
 const mapStateToProps = ({ state }) => ({
   ctx: state.context2D,
   updateTick: state.updateTick,
   windowSize: state.window.inner,
+  backgroundSoundController: state.backgroundSoundController,
+  backgroundSoundControllerVolume: state.backgroundSoundControllerVolume,
+  backgroundSoundControllerMuted: state.backgroundSoundControllerMuted,
 });
 
-const mapDispatchToProps = (dispatch) => ({});
+const mapDispatchToProps = (dispatch) => ({
+  setBackgroundSoundControllerMuted: (muted) =>
+    dispatch(setBackgroundSoundControllerMuted(muted)),
+  setBackgroundSoundControllerVolume: (volume) =>
+    dispatch(setBackgroundSoundControllerVolume(volume)),
+});
 
-function SettingsPage({ ctx, updateTick, windowSize }) {
+function SettingsPage({
+  ctx,
+  updateTick,
+  windowSize,
+  backgroundSoundController,
+  backgroundSoundControllerMuted,
+  setBackgroundSoundControllerMuted,
+  backgroundSoundControllerVolume,
+  setBackgroundSoundControllerVolume,
+}) {
   const navigateTo = useNavigate();
   window.navigateTo = navigateTo;
   useEffect(() => {
@@ -36,6 +58,24 @@ function SettingsPage({ ctx, updateTick, windowSize }) {
         y={windowSize.height - vmin(12)}
         onClick={"navigateTo(-1)"}
       />
+      <Text
+        text="background song volume:"
+        font="fippsregular"
+        fontSize={3}
+        color="black"
+        x={vmin(5)}
+        y={vmin(10)}
+      />
+      <MuteButton
+        x={5.0}
+        y={10}
+        savedVolume={backgroundSoundControllerVolume}
+        getSavedVolume={setBackgroundSoundControllerVolume}
+        sound={backgroundSoundController}
+        initMuted={backgroundSoundControllerMuted}
+        getMuted={setBackgroundSoundControllerMuted}
+      />
+      <HorizontalSlider width={50} x={15} y={13.5} />
     </>
   );
 }

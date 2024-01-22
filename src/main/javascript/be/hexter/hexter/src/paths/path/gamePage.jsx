@@ -13,6 +13,7 @@ const mapStateToProps = ({ state }) => ({
   innerWindow: state.window.inner,
   updateTick: state.updateTick,
   context2D: state.context2D,
+  backgroundSoundControllerVolume: state.backgroundSoundControllerVolume,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -29,6 +30,8 @@ function GamePage({
   fingerprint,
   authenticationToken,
   updateTick,
+  setBackgroundSoundController,
+  backgroundSoundControllerVolume,
 }) {
   useCheckAuthenticationToken(csrfToken, fingerprint, authenticationToken);
   const navigateTo = useNavigate();
@@ -40,7 +43,11 @@ function GamePage({
       navigateTo("/main-menu");
     }
   }, [setContext2D, context2D, canvasRef, navigateTo]);
-  const backgroundSound = useHowl("/rsc/sounds/background/happy.wav", true);
+  const backgroundSound = useHowl(
+    "/rsc/sounds/background/happy.wav",
+    true,
+    backgroundSoundControllerVolume
+  );
   useEffect(() => {
     setBackgroundSoundController(backgroundSound);
   }, [backgroundSound]);

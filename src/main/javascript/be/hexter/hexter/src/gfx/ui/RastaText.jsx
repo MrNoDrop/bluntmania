@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { vmin } from "../../tools/vScale";
 import { connect } from "react-redux";
-import "./rastaText.scss";
 
 const mapStateToProps = ({ state }) => ({
   ctx: state.context2D,
