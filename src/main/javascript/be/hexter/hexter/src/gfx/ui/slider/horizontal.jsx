@@ -49,7 +49,7 @@ function HorizontalSlider({
       0,
       sliderLeft.width,
       sliderLeft.height,
-      vmin(x),
+      vmin(x) - vmin(0.9),
       vmin(y),
       sliderLeft.width,
       sliderLeft.height / 4
