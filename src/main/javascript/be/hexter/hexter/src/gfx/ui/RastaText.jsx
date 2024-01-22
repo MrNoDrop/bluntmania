@@ -13,7 +13,7 @@ const mapDispatchToProps = (dispatch) => ({});
 function RastaText({ text, x, y, ctx, updateTick, windowSize }) {
   const [textColor, setTextColor] = useState(0);
   useEffect(() => {
-    ctx.font = "15vmin fippsregular";
+    ctx.font = `${vmin(15)}px fippsregular`;
     switch (textColor) {
       default:
         ctx.fillStyle = "white";

@@ -22,7 +22,7 @@ function Text({
   windowSize,
 }) {
   useEffect(() => {
-    ctx.font = `${fontSize}vmin ${font}`;
+    ctx.font = `${vmin(fontSize)}px ${font}`;
     ctx.fillStyle = color;
     ctx.fillText(text, x, y);
   }, [color, ctx, font, fontSize, text, updateTick, windowSize, x, y]);
