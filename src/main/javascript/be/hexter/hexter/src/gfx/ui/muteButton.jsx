@@ -73,8 +73,8 @@ function ImageSwitchButton({
       height,
       vmin(x),
       vmin(y),
-      width / 5,
-      height / 5
+      vmin(width / 10) / 5,
+      vmin(height / 10) / 5
     );
     setRectangle(new Rectangle(vmin(x), vmin(y), width / 5, height / 5));
   }, [updateTick]);
@@ -110,7 +110,7 @@ function ImageSwitchButton({
     } else {
       saveVolume(currentVolume);
     }
-  }, [muted]);
+  }, [muted, updateTick]);
   useEffect(() => {
     if (!muted && !mouseEntered) {
       setCurrentImage(0);
