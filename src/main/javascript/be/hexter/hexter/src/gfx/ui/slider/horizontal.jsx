@@ -62,7 +62,7 @@ function HorizontalSlider({
       0,
       sliderRight.width,
       sliderRight.height,
-      vmin(x) + width,
+      vmin(x) + width + vmin(2),
       vmin(y),
       sliderRight.width,
       sliderRight.height / 4
@@ -82,8 +82,6 @@ function HorizontalSlider({
         sliderMiddle.height / 4
       );
     }
-  }, [ctx, updateTick]);
-  useEffect(() => {
     if (sliderKnob && sliderLeft) {
       ctx.drawImage(
         sliderKnob.img,
