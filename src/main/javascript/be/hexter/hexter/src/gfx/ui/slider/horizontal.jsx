@@ -28,15 +28,13 @@ function HorizontalSlider({
   const [mouseExited, setMouseExited] = useState(false);
   const [mouseDown, setMouseDown] = useState(false);
   const [mouseLocked, setMouseLocked] = useState(false);
-  const [val, setVal] = useState(value);
-  console.log(val);
+  const [val] = useState(value);
   const [minNobLocation, setMinNobLocation] = useState(undefined);
   const [maxNobLocation, setMaxNobLocation] = useState(undefined);
   const [nobSlideXLocation, setNobSlideXLocation] = useState(
     (width / 100) * val * 100
   );
   const [knobRectangle, setKnobRectangle] = useState(new Rectangle(0, 0, 0, 0));
-  const [knobDrag, setKnobDrag] = useState(0);
   const sliderKnob = useImageLoader("/rsc/ui/slider/slider-knob.png");
   const sliderLeft = useImageLoader("/rsc/ui/slider/slider-left.png");
   const sliderMiddle = useImageLoader("/rsc/ui/slider/slider-middle.png");
