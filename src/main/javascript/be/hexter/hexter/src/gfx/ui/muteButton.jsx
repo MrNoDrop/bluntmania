@@ -20,7 +20,6 @@ function ImageSwitchButton({
   windowSize,
   x,
   y,
-  sound,
   disabled = false,
   clickSound,
   getMuted,
@@ -106,12 +105,10 @@ function ImageSwitchButton({
     }
   }, [mouseEntered, mouseExited]);
   useEffect(() => {
-    if (!sound) return;
     if (muted) {
-      saveVolume(currentVolume);
-      sound.volume(0);
+      saveVolume(0);
     } else {
-      sound.volume(savedVolume);
+      saveVolume(currentVolume);
     }
   }, [muted]);
   useEffect(() => {

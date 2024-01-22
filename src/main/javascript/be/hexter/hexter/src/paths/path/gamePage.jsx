@@ -14,6 +14,7 @@ const mapStateToProps = ({ state }) => ({
   updateTick: state.updateTick,
   context2D: state.context2D,
   backgroundSoundControllerVolume: state.backgroundSoundControllerVolume,
+  backgroundSoundControllerMuted: state.backgroundSoundControllerMuted,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -32,6 +33,7 @@ function GamePage({
   updateTick,
   setBackgroundSoundController,
   backgroundSoundControllerVolume,
+  backgroundSoundControllerMuted,
 }) {
   useCheckAuthenticationToken(csrfToken, fingerprint, authenticationToken);
   const navigateTo = useNavigate();
@@ -51,6 +53,9 @@ function GamePage({
   useEffect(() => {
     setBackgroundSoundController(backgroundSound);
   }, [backgroundSound]);
+  if (backgroundSoundControllerMuted) {
+    backgroundSound.volume(0);
+  }
   return (
     <>
       <canvas
