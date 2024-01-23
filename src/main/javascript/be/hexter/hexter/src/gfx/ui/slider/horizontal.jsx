@@ -32,7 +32,7 @@ function HorizontalSlider({
   const [minNobLocation, setMinNobLocation] = useState(undefined);
   const [maxNobLocation, setMaxNobLocation] = useState(undefined);
   const [nobSlideXLocation, setNobSlideXLocation] = useState(
-    (width / 100) * val * 100
+    (vmin(width / 10) / 100) * val * 100
   );
   const [knobRectangle, setKnobRectangle] = useState(new Rectangle(0, 0, 0, 0));
   const sliderKnob = useImageLoader("/rsc/ui/slider/slider-knob.png");
@@ -42,7 +42,7 @@ function HorizontalSlider({
 
   useEffect(() => {
     if (!sliderLeft) return;
-    setMinNobLocation(vmin(x) + sliderLeft.width / 3);
+    setMinNobLocation(vmin(x) + vmin(sliderLeft.width / 10) / 3);
     ctx.drawImage(
       sliderLeft.img,
       0,
@@ -51,24 +51,24 @@ function HorizontalSlider({
       sliderLeft.height,
       vmin(x) - vmin(0.8),
       vmin(y),
-      sliderLeft.width,
-      sliderLeft.height / 4
+      vmin(sliderLeft.width / 10),
+      vmin(sliderLeft.height / 10) / 4
     );
     if (!sliderRight) return;
-    setMaxNobLocation(vmin(x) + width);
+    setMaxNobLocation(vmin(x) + vmin(width / 10));
     ctx.drawImage(
       sliderRight.img,
       0,
       0,
       sliderRight.width,
       sliderRight.height,
-      vmin(x) + width + vmin(1.65),
+      vmin(x) + vmin(width / 10) + vmin(1.65),
       vmin(y),
-      sliderRight.width,
-      sliderRight.height / 4
+      vmin(sliderRight.width / 10),
+      vmin(sliderRight.height / 10) / 4
     );
     if (!sliderMiddle) return;
-    const pieces = width / sliderMiddle.width;
+    const pieces = vmin(width / 10) / vmin(sliderMiddle.width / 10);
     for (let piece = Math.floor(pieces); piece > 0; --piece) {
       ctx.drawImage(
         sliderMiddle.img,
@@ -76,10 +76,10 @@ function HorizontalSlider({
         0,
         sliderMiddle.width,
         sliderMiddle.height,
-        vmin(x) + piece * sliderMiddle.width,
+        vmin(x) + piece * vmin(sliderMiddle.width / 10),
         vmin(y),
-        sliderMiddle.width + 1,
-        sliderMiddle.height / 4
+        vmin((sliderMiddle.width + 4) / 10),
+        vmin(sliderMiddle.height / 10) / 4
       );
     }
     if (sliderKnob && sliderLeft) {
@@ -89,17 +89,17 @@ function HorizontalSlider({
         0,
         sliderKnob.width,
         sliderKnob.height,
-        vmin(x) + sliderLeft.width / 3 + nobSlideXLocation,
+        vmin(x) + vmin(sliderLeft.width / 10) / 3 + nobSlideXLocation,
         vmin(y) - vmin(0.3),
-        sliderKnob.width,
-        sliderKnob.height / 4
+        vmin(sliderKnob.width / 10),
+        vmin(sliderKnob.height / 10) / 4
       );
       setKnobRectangle(
         new Rectangle(
-          vmin(x) + sliderLeft.width / 3 + nobSlideXLocation,
+          vmin(x) + vmin(sliderLeft.width / 10) / 3 + nobSlideXLocation,
           vmin(y) - vmin(0.3),
-          sliderKnob.width,
-          sliderKnob.height / 4
+          vmin(sliderKnob.width / 10),
+          vmin(sliderKnob.height / 10) / 4
         )
       );
     }
@@ -144,10 +144,10 @@ function HorizontalSlider({
       }
       if (mouseLocked) {
         const value = clientX - minNobLocation - sliderKnob.width / 2;
-        if (value < x + width - sliderKnob.width) {
+        if (value < x + vmin(width / 10)) {
           setNobSlideXLocation(value);
         }
-        if (value < x - sliderKnob.width / 2) {
+        if (value < x - vmin(sliderKnob.width / 2 / 10)) {
           setNobSlideXLocation(0);
         }
       }
