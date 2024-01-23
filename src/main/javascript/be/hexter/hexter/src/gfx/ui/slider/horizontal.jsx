@@ -64,7 +64,7 @@ function HorizontalSlider({
       0,
       sliderRight.width,
       sliderRight.height,
-      vmin(x) + vmin(width / 10) + vmin(1.65),
+      vmin(x) + vmin(width / 10) + vmin(3),
       vmin(y),
       vmin(sliderRight.width / 10),
       vmin(sliderRight.height / 10) / 4
@@ -120,7 +120,7 @@ function HorizontalSlider({
     if (!disabled && !mouseLocked && (mouseEntered || mouseExited)) {
       new Howl({
         src: ["/rsc/sounds/buttons/hovering.wav"],
-        volume: uiSoundControllerVolume,
+        volume: isNaN(uiSoundControllerVolume) ? 1 : uiSoundControllerVolume,
         autoplay: true,
       });
     }
