@@ -33,6 +33,7 @@ function Button({
   disabled = false,
   uiSoundControllerVolume,
 }) {
+  console.log(uiSoundControllerVolume);
   const [mouseEntered, setMouseEntered] = useState(false);
   const [mouseExited, setMouseExited] = useState(false);
   const [rectangle, setRectangle] = useState(
@@ -85,7 +86,7 @@ function Button({
       if (!disabled && mouseEntered) {
         new Howl({
           src: [clickSound || "/rsc/sounds/buttons/onClick.wav"],
-          volume: uiSoundControllerVolume,
+          volume: isNaN(uiSoundControllerVolume) ? 1 : uiSoundControllerVolume,
           autoplay: true,
         });
         if (!disabled) {
@@ -102,7 +103,7 @@ function Button({
     if (!disabled && (mouseEntered || mouseExited)) {
       new Howl({
         src: ["/rsc/sounds/buttons/hovering.wav"],
-        volume: uiSoundControllerVolume,
+        volume: isNaN(uiSoundControllerVolume) ? 1 : uiSoundControllerVolume,
         autoplay: true,
       });
     }

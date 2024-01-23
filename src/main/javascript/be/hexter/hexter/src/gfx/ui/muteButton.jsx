@@ -15,7 +15,7 @@ const mapStateToProps = ({ state }) => ({
 
 const mapDispatchToProps = (dispatch) => ({});
 
-function ImageSwitchButton({
+function MuteButton({
   ctx,
   updateTick,
   windowSize,
@@ -85,7 +85,7 @@ function ImageSwitchButton({
       if (!disabled && mouseEntered) {
         new Howl({
           src: [clickSound || "/rsc/sounds/buttons/onClick.wav"],
-          volume: uiSoundControllerVolume,
+          volume: isNaN(uiSoundControllerVolume) ? 1 : uiSoundControllerVolume,
           autoplay: true,
         });
         if (!disabled) {
@@ -103,7 +103,7 @@ function ImageSwitchButton({
     if (!disabled && (mouseEntered || mouseExited)) {
       new Howl({
         src: ["/rsc/sounds/buttons/hovering.wav"],
-        volume: uiSoundControllerVolume,
+        volume: isNaN(uiSoundControllerVolume) ? 1 : uiSoundControllerVolume,
         autoplay: true,
       });
     }
@@ -131,4 +131,4 @@ function ImageSwitchButton({
   }, [muted, mouseEntered]);
   return <></>;
 }
-export default connect(mapStateToProps, mapDispatchToProps)(ImageSwitchButton);
+export default connect(mapStateToProps, mapDispatchToProps)(MuteButton);
