@@ -78,7 +78,7 @@ function SettingsPage({
         getMuted={setBackgroundSoundControllerMuted}
       />
       <HorizontalSlider
-        width={vmin(58)}
+        width={600}
         x={5}
         y={12}
         value={backgroundSoundControllerVolume}
