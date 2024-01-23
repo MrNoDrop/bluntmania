@@ -10,6 +10,7 @@ const mapStateToProps = ({ state }) => ({
   ctx: state.context2D,
   updateTick: state.updateTick,
   windowSize: state.window.inner,
+  uiSoundControllerVolume: state.uiSoundControllerVolume,
 });
 
 const mapDispatchToProps = (dispatch) => ({});
@@ -26,6 +27,7 @@ function ImageSwitchButton({
   initMuted,
   savedVolume,
   getSavedVolume: saveVolume,
+  uiSoundControllerVolume,
 }) {
   const [currentVolume] = useState(savedVolume);
   const [muted, setMuted] = useState(initMuted);
@@ -83,6 +85,7 @@ function ImageSwitchButton({
       if (!disabled && mouseEntered) {
         new Howl({
           src: [clickSound || "/rsc/sounds/buttons/onClick.wav"],
+          volume: uiSoundControllerVolume,
           autoplay: true,
         });
         if (!disabled) {
@@ -100,6 +103,7 @@ function ImageSwitchButton({
     if (!disabled && (mouseEntered || mouseExited)) {
       new Howl({
         src: ["/rsc/sounds/buttons/hovering.wav"],
+        volume: uiSoundControllerVolume,
         autoplay: true,
       });
     }

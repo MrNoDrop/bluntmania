@@ -9,6 +9,7 @@ const mapStateToProps = ({ state }) => ({
   ctx: state.context2D,
   updateTick: state.updateTick,
   windowSize: state.window.inner,
+  uiSoundControllerVolume: state.uiSoundControllerVolume,
 });
 
 const mapDispatchToProps = (dispatch) => ({});
@@ -23,6 +24,7 @@ function HorizontalSlider({
   updateTick,
   windowSize,
   disabled = false,
+  uiSoundControllerVolume,
 }) {
   const [mouseEntered, setMouseEntered] = useState(false);
   const [mouseExited, setMouseExited] = useState(false);
@@ -118,6 +120,7 @@ function HorizontalSlider({
     if (!disabled && !mouseLocked && (mouseEntered || mouseExited)) {
       new Howl({
         src: ["/rsc/sounds/buttons/hovering.wav"],
+        volume: uiSoundControllerVolume,
         autoplay: true,
       });
     }

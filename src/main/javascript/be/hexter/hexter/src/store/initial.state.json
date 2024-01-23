@@ -5,6 +5,7 @@
     "backgroundSoundController": null,
     "backgroundSoundControllerMuted": false,
     "backgroundSoundControllerVolume": 1.0,
+    "uiSoundControllerVolume": 1.0,
     "form": {
       "forgot": {
         "email": "",

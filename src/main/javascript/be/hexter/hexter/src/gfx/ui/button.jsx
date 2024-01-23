@@ -9,6 +9,7 @@ const mapStateToProps = ({ state }) => ({
   ctx: state.context2D,
   updateTick: state.updateTick,
   windowSize: state.window.inner,
+  uiSoundControllerVolume: state.uiSoundControllerVolume,
 });
 
 const mapDispatchToProps = (dispatch) => ({});
@@ -30,6 +31,7 @@ function Button({
   rectangleXOffset = 0,
   rectangleYOffset = 0,
   disabled = false,
+  uiSoundControllerVolume,
 }) {
   const [mouseEntered, setMouseEntered] = useState(false);
   const [mouseExited, setMouseExited] = useState(false);
@@ -83,6 +85,7 @@ function Button({
       if (!disabled && mouseEntered) {
         new Howl({
           src: [clickSound || "/rsc/sounds/buttons/onClick.wav"],
+          volume: uiSoundControllerVolume,
           autoplay: true,
         });
         if (!disabled) {
@@ -99,6 +102,7 @@ function Button({
     if (!disabled && (mouseEntered || mouseExited)) {
       new Howl({
         src: ["/rsc/sounds/buttons/hovering.wav"],
+        volume: uiSoundControllerVolume,
         autoplay: true,
       });
     }

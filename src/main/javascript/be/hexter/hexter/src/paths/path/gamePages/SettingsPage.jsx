@@ -8,6 +8,7 @@ import Text from "../../../gfx/ui/text";
 import MuteButton from "../../../gfx/ui/muteButton";
 import setBackgroundSoundControllerMuted from "../../../store/actions/set/controller/backgroundSoundMuted";
 import setBackgroundSoundControllerVolume from "../../../store/actions/set/controller/backgroundSoundVolume";
+import setUiSoundControllerVolume from "../../../store/actions/set/controller/uiSoundVolume";
 import HorizontalSlider from "../../../gfx/ui/slider/horizontal";
 
 const mapStateToProps = ({ state }) => ({
@@ -17,6 +18,7 @@ const mapStateToProps = ({ state }) => ({
   backgroundSoundController: state.backgroundSoundController,
   backgroundSoundControllerVolume: state.backgroundSoundControllerVolume,
   backgroundSoundControllerMuted: state.backgroundSoundControllerMuted,
+  uiSoundControllerVolume: state.uiSoundControllerVolume,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -24,6 +26,8 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(setBackgroundSoundControllerMuted(muted)),
   setBackgroundSoundControllerVolume: (volume) =>
     dispatch(setBackgroundSoundControllerVolume(volume)),
+  setUiSoundControllerVolume: (volume) =>
+    dispatch(setUiSoundControllerVolume(volume)),
 });
 
 function SettingsPage({
@@ -35,6 +39,8 @@ function SettingsPage({
   setBackgroundSoundControllerMuted,
   backgroundSoundControllerVolume,
   setBackgroundSoundControllerVolume,
+  uiSoundControllerVolume,
+  setUiSoundControllerVolume,
 }) {
   const navigateTo = useNavigate();
   window.navigateTo = navigateTo;
@@ -83,6 +89,21 @@ function SettingsPage({
         y={12}
         value={backgroundSoundControllerVolume}
         getValue={setBackgroundSoundControllerVolume}
+      />
+      <Text
+        text="ui volume:"
+        font="fippsregular"
+        fontSize={3}
+        color="black"
+        x={vmin(5)}
+        y={vmin(20)}
+      />
+      <HorizontalSlider
+        width={600}
+        x={5}
+        y={22}
+        value={uiSoundControllerVolume}
+        getValue={setUiSoundControllerVolume}
       />
     </>
   );
