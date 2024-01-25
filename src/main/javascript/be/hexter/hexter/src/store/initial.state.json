@@ -6,6 +6,13 @@
     "backgroundSoundControllerMuted": false,
     "backgroundSoundControllerVolume": 1.0,
     "uiSoundControllerVolume": 1.0,
+    "environmentOffsetX": 0,
+    "environmentOffsetY": 0,
+    "player": {
+      "positionX": null,
+      "positionY": null
+    },
+    "collisions": [],
     "form": {
       "forgot": {
         "email": "",
