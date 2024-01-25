@@ -33,7 +33,6 @@ function Button({
   disabled = false,
   uiSoundControllerVolume,
 }) {
-  console.log(uiSoundControllerVolume);
   const [mouseEntered, setMouseEntered] = useState(false);
   const [mouseExited, setMouseExited] = useState(false);
   const [rectangle, setRectangle] = useState(
