@@ -8,11 +8,10 @@
     "uiSoundControllerVolume": 1.0,
     "environmentOffsetX": 0,
     "environmentOffsetY": 0,
-    "player": {
-      "positionX": null,
-      "positionY": null
+    "level": {
+      "width": 0,
+      "height": 0
     },
-    "collisions": [],
     "form": {
       "forgot": {
         "email": "",
