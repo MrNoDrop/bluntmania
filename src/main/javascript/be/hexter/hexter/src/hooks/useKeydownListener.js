@@ -5,7 +5,7 @@ const useKeydownListener = () => {
   useEffect(() => {
     window.onkeydown = window.onkeyup = function (e) {
       const keysCopy = { ...keys };
-      keysCopy[e.key] = e.type === "keydown";
+      keysCopy[e.key.toLowerCase()] = e.type === "keydown";
       setKeys(keysCopy);
     };
     return () => {
