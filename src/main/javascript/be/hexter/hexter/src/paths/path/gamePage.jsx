@@ -52,7 +52,7 @@ function GamePage({
   );
   useEffect(() => {
     setBackgroundSoundController(backgroundSound);
-  }, [backgroundSound]);
+  }, [backgroundSound, setBackgroundSoundController]);
   if (backgroundSoundControllerMuted) {
     backgroundSound.volume(0);
   }
