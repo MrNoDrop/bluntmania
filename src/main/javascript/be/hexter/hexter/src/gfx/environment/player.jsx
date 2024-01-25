@@ -11,6 +11,7 @@ const mapStateToProps = ({ state }) => ({
   windowSize: state.window.inner,
   environmentOffsetX: state.environmentOffsetX,
   environmentOffsetY: state.environmentOffsetY,
+  level: state.level,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -28,10 +29,53 @@ function Player({
   environmentOffsetY,
   setEnvironmentOffsetX,
   setEnvironmentOffsetY,
+  level,
 }) {
+  const speed = 10;
   const keys = useKeydownListener();
-  console.log(keys);
-  useEffect(() => {}, []);
+  const [reachedLeftLimit, setReachedLeftLimit] = useState(false);
+  const [reachedRightLimit, setReachedRightLimit] = useState(false);
+  const [defaultXlocation] = useState(0 + windowSize.width / 2);
+  const [xLocation, setXLocation] = useState(defaultXlocation);
+
+  useEffect(() => {
+    setReachedLeftLimit(environmentOffsetX + speed > 0);
+    setReachedRightLimit(
+      -(environmentOffsetX - speed) > level.width - windowSize.width
+    );
+    if (keys.d === true) {
+      if (reachedRightLimit) {
+        if (xLocation + speed < windowSize.width - 100) {
+          setXLocation(xLocation + speed);
+        } else if (xLocation + speed >= windowSize.width - 100) {
+          setXLocation(windowSize.width - 100);
+        }
+      } else if (xLocation < defaultXlocation) {
+        setXLocation(xLocation + speed);
+      } else
+        setEnvironmentOffsetX(
+          -(environmentOffsetX - speed) > level.width - windowSize.width
+            ? -level.width + windowSize.width
+            : environmentOffsetX - speed
+        );
+    }
+    if (keys.a === true) {
+      if (reachedLeftLimit) {
+        if (xLocation - speed >= 0) {
+          setXLocation(xLocation - speed);
+        } else if (xLocation - speed < 0) {
+          setXLocation(0);
+        }
+      } else if (xLocation > defaultXlocation) {
+        setXLocation(xLocation - speed);
+      } else
+        setEnvironmentOffsetX(
+          environmentOffsetX + speed > 0 ? 0 : environmentOffsetX + speed
+        );
+    }
+  }, [keys]);
+  ctx.fillRect(xLocation, 0 + windowSize.height / 2, 100, 100);
+
   return <></>;
 }
 
