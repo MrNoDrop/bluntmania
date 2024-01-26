@@ -43,16 +43,41 @@ function Player({
   const [movingLeft, setMovingLeft] = useState(false);
   const [movingRight, setMovingRight] = useState(false);
   const [crouching, setCrouching] = useState(false);
-  const [falling, setFalling] = useState(false);
   const xPos = xLocation + -environmentOffsetX;
   const yPos = yLocation + -environmentOffsetY;
 
+  const collidesBottom =
+    level.collisions
+      .map((rectangle) =>
+        rectangle.collidesRect(
+          new Rectangle(xPos, yPos + speed, 100, crouching ? 100 : 200)
+        )
+      )
+      .filter((collides) => collides).length > 0;
+  const collidesRight =
+    level.collisions
+      .map((rectangle) =>
+        rectangle.collidesRect(
+          new Rectangle(xPos + speed, yPos - speed, 100, crouching ? 100 : 200)
+        )
+      )
+      .filter((collides) => collides).length > 0;
+  const collidesLeft =
+    level.collisions
+      .map((rectangle) =>
+        rectangle.collidesRect(
+          new Rectangle(xPos - speed, yPos - speed, 100, crouching ? 100 : 200)
+        )
+      )
+      .filter((collides) => collides).length > 0;
   console.log(
     xPos,
     yPos,
     level.collisions
       .map((rectangle) =>
-        rectangle.collidesRect(new Rectangle(xPos, yPos + speed, 100, 200))
+        rectangle.collidesRect(
+          new Rectangle(xPos, yPos + speed, 100, crouching ? 100 : 200)
+        )
       )
       .filter((collides) => collides)
   );
@@ -61,14 +86,7 @@ function Player({
     setReachedRightLimit(
       -(environmentOffsetX - speed) > level.width - windowSize.width
     );
-    if (
-      keys.d === true &&
-      level.collisions
-        .map((rectangle) =>
-          rectangle.collidesRect(new Rectangle(xPos + speed, yPos, 100, 200))
-        )
-        .filter((collides) => collides).length === 0
-    ) {
+    if (keys.d === true && !collidesRight) {
       setMovingRight(true);
       if (reachedRightLimit) {
         if (xLocation + speed < windowSize.width - 100) {
@@ -92,14 +110,7 @@ function Player({
   //move left
   useEffect(() => {
     setReachedLeftLimit(environmentOffsetX + speed > 0);
-    if (
-      keys.a === true &&
-      level.collisions
-        .map((rectangle) =>
-          rectangle.collidesRect(new Rectangle(xPos - speed, yPos, 100, 200))
-        )
-        .filter((collides) => collides).length === 0
-    ) {
+    if (keys.a === true && !collidesLeft) {
       setMovingLeft(true);
       if (reachedLeftLimit) {
         if (xLocation - speed >= 0) {
@@ -129,14 +140,7 @@ function Player({
 
   //falling
   useEffect(() => {
-    if (
-      falling &&
-      level.collisions
-        .map((rectangle) =>
-          rectangle.collidesRect(new Rectangle(xPos, yPos + speed, 100, 200))
-        )
-        .filter((collides) => collides).length === 0
-    ) {
+    if (!collidesBottom) {
       setReachedBottomLimit(
         !(-(environmentOffsetY - speed) < level.height - windowSize.height)
       );
