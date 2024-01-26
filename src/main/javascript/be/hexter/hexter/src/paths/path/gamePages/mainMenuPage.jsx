@@ -29,25 +29,30 @@ function MainMenuPage({ ctx, updateTick, windowSize }) {
       <ParallaxBackground
         image="/rsc/parallax/forest/layer_01.png"
         direction="left"
+        slowerBy={3}
       />
       <ParallaxBackground
         image="/rsc/parallax/forest/layer_02.png"
         direction="right"
+        slowerBy={3}
       />
       <ParallaxBackground
         image="/rsc/parallax/forest/layer_03.png"
         direction="right"
-        speed={2}
+        speed={1}
+        slowerBy={3}
       />
       <ParallaxBackground
         image="/rsc/parallax/forest/layer_04.png"
         direction="right"
-        speed={3}
+        speed={2}
+        slowerBy={3}
       />
       <ParallaxBackground
         image="/rsc/parallax/forest/layer_05.png"
         direction="right"
-        speed={3}
+        speed={2}
+        slowerBy={3}
       />
       <Title
         text="Blunt Mania"

@@ -14,9 +14,11 @@ function ParallaxBackground({
   image,
   direction,
   speed = 1,
+  slowerBy = 1,
 }) {
   const [imageDimension, setImageDimension] = useState({ width: 0, height: 0 });
   const [loadedImage, setLoadedImage] = useState(undefined);
+  const [tick, setTick] = useState(0);
   const [offset, setOffset] = useState(
     direction === "right" ? 0 : windowSize.width
   );
@@ -29,7 +31,10 @@ function ParallaxBackground({
     setLoadedImage(img);
   }, [ctx, image]);
   useEffect(() => {
-    setOffset(direction === "right" ? offset + speed : offset - speed);
+    setTick(tick + 1);
+    if (tick % slowerBy === 0) {
+      setOffset(direction === "right" ? offset + speed : offset - speed);
+    }
     if (loadedImage) {
       ctx.drawImage(
         loadedImage,
