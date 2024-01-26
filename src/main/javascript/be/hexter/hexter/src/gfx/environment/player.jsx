@@ -21,7 +21,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 function Player({
   x = 0,
-  y,
+  y = 0,
   ctx,
   updateTick,
   windowSize,
@@ -35,8 +35,7 @@ function Player({
   const keys = useKeydownListener();
   const [reachedLeftLimit, setReachedLeftLimit] = useState(false);
   const [reachedRightLimit, setReachedRightLimit] = useState(false);
-  const [defaultXlocation] = useState(x + windowSize.width / 2);
-  const [xLocation, setXLocation] = useState(defaultXlocation);
+  const [xLocation, setXLocation] = useState(x);
   const [movingLeft, setMovingLeft] = useState(false);
   const [movingRight, setMovingRight] = useState(false);
   const [crouching, setCrouching] = useState(false);
@@ -55,7 +54,7 @@ function Player({
         } else if (xLocation + speed >= windowSize.width - 100) {
           setXLocation(windowSize.width - 100);
         }
-      } else if (xLocation < defaultXlocation) {
+      } else if (xLocation < windowSize.width / 2) {
         setXLocation(xLocation + speed);
       } else
         setEnvironmentOffsetX(
@@ -73,7 +72,7 @@ function Player({
         } else if (xLocation - speed < 0) {
           setXLocation(0);
         }
-      } else if (xLocation > defaultXlocation) {
+      } else if (xLocation > windowSize.width / 2) {
         setXLocation(xLocation - speed);
       } else
         setEnvironmentOffsetX(
