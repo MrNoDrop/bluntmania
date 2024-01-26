@@ -52,11 +52,30 @@ function Level1Page({
   }, []);
   return (
     <>
-      <Player x={0} y={0} />
+      <Player x={100} y={0} />
       <Mossy x={100} y={200} />
       <Mossy x={100} y={328} assetY={1} />
       <Mossy x={228} y={200} assetX={1} />
       <Mossy x={228} y={328} assetX={1} assetY={1} />
+      <Mossy x={228} y={428} assetX={1} assetY={2} />
+      <Mossy x={100} y={428} assetX={0} assetY={2} />
+      <Mossy x={356} y={200} assetX={2} />
+      <Mossy x={456} y={310} assetX={1} />
+      <Mossy x={356} y={310} assetX={4} assetY={1} />
+      <Mossy x={584} y={310} assetX={1} />
+      <Mossy x={710} y={310} assetX={2} />
+      <Mossy x={710} y={438} assetX={2} assetY={1} />
+      <Mossy x={710} y={538} assetX={2} assetY={2} />
+      <Mossy x={582} y={538} assetX={1} assetY={2} />
+      <Mossy x={482} y={538} assetX={1} assetY={2} />
+      <Mossy x={582} y={438} assetX={1} assetY={1} />
+      <Mossy x={482} y={438} assetX={1} assetY={1} />
+      <Mossy x={355} y={438} assetX={5} assetY={0} />
+      <Mossy x={355} y={538} assetX={0} assetY={2} />
+      <Mossy x={855} y={438} assetX={0} assetY={3} />
+      <Mossy x={980} y={438} assetX={1} assetY={3} />
+      <Mossy x={1080} y={438} assetX={1} assetY={3} />
+      <Mossy x={1180} y={438} assetX={2} assetY={3} />
     </>
   );
 }
