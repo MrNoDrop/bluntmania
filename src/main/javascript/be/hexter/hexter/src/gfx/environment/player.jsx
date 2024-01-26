@@ -43,6 +43,7 @@ function Player({
   const [movingLeft, setMovingLeft] = useState(false);
   const [movingRight, setMovingRight] = useState(false);
   const [crouching, setCrouching] = useState(false);
+  const [jumping, setJumping] = useState(false);
   const xPos = xLocation + -environmentOffsetX;
   const yPos = yLocation + -environmentOffsetY;
 
@@ -124,9 +125,9 @@ function Player({
 
   // crouch
   useEffect(() => {
-    if (keys.s === true && !crouching) {
+    if (keys.s === true && !crouching && !jumping) {
       setCrouching(true);
-    } else if (keys.s === false && crouching) {
+    } else if ((keys.s === false && crouching) || jumping) {
       setCrouching(false);
     }
   }, [keys, updateTick]);
@@ -134,6 +135,7 @@ function Player({
   //falling
   useEffect(() => {
     if (!collidesBottom) {
+      setJumping(false);
       setReachedBottomLimit(
         !(-(environmentOffsetY - speed) < level.height - windowSize.height)
       );
@@ -148,6 +150,7 @@ function Player({
   //jumping
   useEffect(() => {
     if (keys[" "] === true && !collidesTop) {
+      setJumping(true);
       if (yPos > level.height - windowSize.height / 2) {
         setYLocation(yLocation - speed * 2);
       } else {
