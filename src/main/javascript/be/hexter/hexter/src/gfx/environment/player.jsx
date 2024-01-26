@@ -151,7 +151,7 @@ function Player({
   //jumping
   useEffect(() => {
     if (keys[" "] === true) {
-      if (yPos > level.height - windowSize.height) {
+      if (yPos > level.height - windowSize.height / 2) {
         setYLocation(yLocation - speed * 2);
       } else {
         setEnvironmentOffsetY(environmentOffsetY + speed * 2);
