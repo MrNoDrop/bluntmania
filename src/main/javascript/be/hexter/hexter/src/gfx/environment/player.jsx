@@ -46,6 +46,12 @@ function Player({
   const xPos = xLocation + -environmentOffsetX;
   const yPos = yLocation + -environmentOffsetY;
 
+  const collidesTop =
+    level.collisions
+      .map((rectangle) =>
+        rectangle.collidesRect(new Rectangle(xPos, yPos - speed, 100, 200))
+      )
+      .filter((collides) => collides).length > 0;
   const collidesBottom =
     level.collisions
       .map((rectangle) =>
@@ -68,15 +74,6 @@ function Player({
         )
       )
       .filter((collides) => collides).length > 0;
-  console.log(
-    xPos,
-    yPos,
-    level.collisions
-      .map((rectangle) =>
-        rectangle.collidesRect(new Rectangle(xPos, yPos + speed, 100, 200))
-      )
-      .filter((collides) => collides)
-  );
   // move right
   useEffect(() => {
     setReachedRightLimit(
@@ -150,7 +147,7 @@ function Player({
 
   //jumping
   useEffect(() => {
-    if (keys[" "] === true) {
+    if (keys[" "] === true && !collidesTop) {
       if (yPos > level.height - windowSize.height / 2) {
         setYLocation(yLocation - speed * 2);
       } else {
