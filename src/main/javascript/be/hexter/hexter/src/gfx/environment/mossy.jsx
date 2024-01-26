@@ -45,6 +45,12 @@ function MossyAsset({
       512 / 4,
       512 / 4
     );
+  // ctx.fillRect(
+  //   x + environmentOffsetX,
+  //   y + environmentOffsetY,
+  //   512 / 4,
+  //   512 / 4
+  // );
   useEffect(() => {
     addLevelCollision(state, new Rectangle(x, y, 512 / 4, 512 / 4));
   }, []);
