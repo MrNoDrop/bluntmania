@@ -31,18 +31,21 @@ function Player({
   setEnvironmentOffsetY,
   level,
 }) {
-  const speed = 10;
+  const speed = 3;
   const keys = useKeydownListener();
   const [reachedLeftLimit, setReachedLeftLimit] = useState(false);
   const [reachedRightLimit, setReachedRightLimit] = useState(false);
+  const [reachedTopLimit, setReachedTopLimit] = useState(false);
+  const [reachedBottomLimit, setReachedBottomLimit] = useState(false);
   const [xLocation, setXLocation] = useState(x);
+  const [yLocation, setYLocation] = useState(y);
   const [movingLeft, setMovingLeft] = useState(false);
   const [movingRight, setMovingRight] = useState(false);
   const [crouching, setCrouching] = useState(false);
-  const [falling, setFalling] = useState(false);
+  const [falling, setFalling] = useState(true);
 
+  // move right
   useEffect(() => {
-    setReachedLeftLimit(environmentOffsetX + speed > 0);
     setReachedRightLimit(
       -(environmentOffsetX - speed) > level.width - windowSize.width
     );
@@ -64,7 +67,13 @@ function Player({
         );
     } else if (movingRight) {
       setMovingRight(false);
-    } else if (keys.a === true) {
+    }
+  }, [keys, updateTick]);
+
+  //move left
+  useEffect(() => {
+    setReachedLeftLimit(environmentOffsetX + speed > 0);
+    if (keys.a === true) {
       setMovingLeft(true);
       if (reachedLeftLimit) {
         if (xLocation - speed >= 0) {
@@ -81,36 +90,53 @@ function Player({
     } else if (movingLeft) {
       setMovingLeft(false);
     }
-  }, [keys]);
+  }, [keys, updateTick]);
 
+  // crouch
   useEffect(() => {
     if (keys.s === true && !crouching) {
       setCrouching(true);
     } else if (keys.s === false && crouching) {
       setCrouching(false);
     }
-  }, [keys]);
-  if (!falling) {
-    if (movingLeft) {
-      ctx.fillStyle = "red";
+  }, [keys, updateTick]);
+
+  //falling
+  useEffect(() => {
+    if (falling) {
+      setReachedBottomLimit(
+        !(-(environmentOffsetY - speed) < level.height - windowSize.height)
+      );
+      if (!reachedBottomLimit) {
+        setEnvironmentOffsetY(environmentOffsetY - speed);
+      } else if (yLocation + speed < windowSize.height - 200) {
+        setYLocation(yLocation + speed);
+      }
     }
-    if (movingLeft && crouching) {
-      ctx.fillStyle = "orange";
-    }
-    if (movingRight) {
-      ctx.fillStyle = "blue";
-    }
-    if (movingRight && crouching) {
-      ctx.fillStyle = "yellow";
-    }
-    if (!movingLeft && !movingRight && !crouching) {
-      ctx.fillStyle = "grey";
-    }
-    if (!movingLeft && !movingRight && crouching) {
-      ctx.fillStyle = "black";
-    }
+  }, [updateTick]);
+  if (movingLeft) {
+    ctx.fillStyle = "red";
   }
-  ctx.fillRect(xLocation, 0 + windowSize.height / 2, 100, 100);
+  if (movingLeft && crouching) {
+    ctx.fillStyle = "orange";
+  }
+  if (movingRight) {
+    ctx.fillStyle = "blue";
+  }
+  if (movingRight && crouching) {
+    ctx.fillStyle = "yellow";
+  }
+  if (!movingLeft && !movingRight && !crouching) {
+    ctx.fillStyle = "grey";
+  }
+  if (!movingLeft && !movingRight && crouching) {
+    ctx.fillStyle = "black";
+  }
+  if (crouching) {
+    ctx.fillRect(xLocation, yLocation + 100, 100, 100);
+  } else {
+    ctx.fillRect(xLocation, yLocation, 100, 200);
+  }
 
   return <></>;
 }
