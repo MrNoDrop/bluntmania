@@ -31,7 +31,11 @@ function ParallaxBackground({
     setLoadedImage(img);
   }, [ctx, image]);
   useEffect(() => {
-    setTick(tick + 1);
+    if (tick > 100) {
+      setTick(0);
+    } else {
+      setTick(tick + 1);
+    }
     if (tick % slowerBy === 0) {
       setOffset(direction === "right" ? offset + speed : offset - speed);
     }
