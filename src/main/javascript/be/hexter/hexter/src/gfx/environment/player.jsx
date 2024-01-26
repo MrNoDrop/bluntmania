@@ -147,6 +147,17 @@ function Player({
       }
     }
   }, [updateTick]);
+
+  //jumping
+  useEffect(() => {
+    if (keys[" "] === true) {
+      if (yPos > level.height - windowSize.height) {
+        setYLocation(yLocation - speed * 2);
+      } else {
+        setEnvironmentOffsetY(environmentOffsetY + speed * 2);
+      }
+    }
+  }, [updateTick]);
   if (movingLeft) {
     ctx.fillStyle = "red";
   }
