@@ -12,20 +12,14 @@ export class Rectangle {
     return width && height;
   }
   collidesRect(rectangle) {
-    var dx = this.x + this.width / 2 - (rectangle.x + rectangle.width / 2);
-    var dy = this.y + this.h / 2 - (rectangle.y + rectangle.height / 2);
-    var width = (this.width + rectangle.width) / 2;
-    var height = (this.height + rectangle.height) / 2;
-    var crossWidth = width * dy;
-    var crossHeight = height * dx;
-    var collision = "none";
-
-    if (crossWidth > crossHeight) {
-      collision = crossWidth > -crossHeight ? "bottom" : "left";
-    } else {
-      collision = crossWidth > -crossHeight ? "right" : "top";
+    if (
+      this.x + this.width > rectangle.x && // this. right edge past rectangle. left
+      this.x < rectangle.x + rectangle.width && // this. left edge past rectangle. right
+      this.y + this.height > rectangle.y && // this. top edge past rectangle. bottom
+      this.y < rectangle.y + rectangle.height // this. bottom edge past r2 top
+    ) {
+      return true;
     }
-
-    return collision;
+    return false;
   }
 }

@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import setEnvironmentOffsetX from "../../store/actions/set/environmentOffsetX";
 import setEnvironmentOffsetY from "../../store/actions/set/environmentOffsetY";
 import useKeydownListener from "../../hooks/useKeydownListener";
+import { Rectangle } from "../../tools/rectangle";
 
 const mapStateToProps = ({ state }) => ({
   ctx: state.context2D,
@@ -42,16 +43,32 @@ function Player({
   const [movingLeft, setMovingLeft] = useState(false);
   const [movingRight, setMovingRight] = useState(false);
   const [crouching, setCrouching] = useState(false);
-  const [falling, setFalling] = useState(true);
+  const [falling, setFalling] = useState(false);
   const xPos = xLocation + -environmentOffsetX;
   const yPos = yLocation + -environmentOffsetY;
 
+  console.log(
+    xPos,
+    yPos,
+    level.collisions
+      .map((rectangle) =>
+        rectangle.collidesRect(new Rectangle(xPos, yPos + speed, 100, 200))
+      )
+      .filter((collides) => collides)
+  );
   // move right
   useEffect(() => {
     setReachedRightLimit(
       -(environmentOffsetX - speed) > level.width - windowSize.width
     );
-    if (keys.d === true) {
+    if (
+      keys.d === true &&
+      level.collisions
+        .map((rectangle) =>
+          rectangle.collidesRect(new Rectangle(xPos + speed, yPos, 100, 200))
+        )
+        .filter((collides) => collides).length === 0
+    ) {
       setMovingRight(true);
       if (reachedRightLimit) {
         if (xLocation + speed < windowSize.width - 100) {
@@ -75,7 +92,14 @@ function Player({
   //move left
   useEffect(() => {
     setReachedLeftLimit(environmentOffsetX + speed > 0);
-    if (keys.a === true) {
+    if (
+      keys.a === true &&
+      level.collisions
+        .map((rectangle) =>
+          rectangle.collidesRect(new Rectangle(xPos - speed, yPos, 100, 200))
+        )
+        .filter((collides) => collides).length === 0
+    ) {
       setMovingLeft(true);
       if (reachedLeftLimit) {
         if (xLocation - speed >= 0) {
@@ -105,7 +129,14 @@ function Player({
 
   //falling
   useEffect(() => {
-    if (falling) {
+    if (
+      falling &&
+      level.collisions
+        .map((rectangle) =>
+          rectangle.collidesRect(new Rectangle(xPos, yPos + speed, 100, 200))
+        )
+        .filter((collides) => collides).length === 0
+    ) {
       setReachedBottomLimit(
         !(-(environmentOffsetY - speed) < level.height - windowSize.height)
       );
