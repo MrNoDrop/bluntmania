@@ -85,7 +85,7 @@ function Button({
       if (!disabled && mouseEntered) {
         new Howl({
           src: [clickSound || "/rsc/sounds/buttons/onClick.wav"],
-          volume: isNaN(uiSoundControllerVolume) ? 1 : uiSoundControllerVolume,
+          volume: isNaN(uiSoundControllerVolume) ? 0 : uiSoundControllerVolume,
           autoplay: true,
         });
         if (!disabled) {
@@ -102,7 +102,7 @@ function Button({
     if (!disabled && (mouseEntered || mouseExited)) {
       new Howl({
         src: ["/rsc/sounds/buttons/hovering.wav"],
-        volume: isNaN(uiSoundControllerVolume) ? 1 : uiSoundControllerVolume,
+        volume: isNaN(uiSoundControllerVolume) ? 0 : uiSoundControllerVolume,
         autoplay: true,
       });
     }

@@ -120,7 +120,7 @@ function HorizontalSlider({
     if (!disabled && !mouseLocked && (mouseEntered || mouseExited)) {
       new Howl({
         src: ["/rsc/sounds/buttons/hovering.wav"],
-        volume: isNaN(uiSoundControllerVolume) ? 1 : uiSoundControllerVolume,
+        volume: isNaN(uiSoundControllerVolume) ? 0 : uiSoundControllerVolume,
         autoplay: true,
       });
     }
