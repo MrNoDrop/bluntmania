@@ -43,6 +43,8 @@ function Player({
   const [movingRight, setMovingRight] = useState(false);
   const [crouching, setCrouching] = useState(false);
   const [falling, setFalling] = useState(true);
+  const xPos = xLocation + -environmentOffsetX;
+  const yPos = yLocation + -environmentOffsetY;
 
   // move right
   useEffect(() => {
