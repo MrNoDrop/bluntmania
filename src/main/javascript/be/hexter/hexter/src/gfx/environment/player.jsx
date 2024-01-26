@@ -49,16 +49,14 @@ function Player({
   const collidesBottom =
     level.collisions
       .map((rectangle) =>
-        rectangle.collidesRect(
-          new Rectangle(xPos, yPos + speed, 100, crouching ? 100 : 200)
-        )
+        rectangle.collidesRect(new Rectangle(xPos, yPos + speed, 100, 200))
       )
       .filter((collides) => collides).length > 0;
   const collidesRight =
     level.collisions
       .map((rectangle) =>
         rectangle.collidesRect(
-          new Rectangle(xPos + speed, yPos - speed, 100, crouching ? 100 : 200)
+          new Rectangle(xPos + speed, yPos - speed, 100, 200)
         )
       )
       .filter((collides) => collides).length > 0;
@@ -66,7 +64,7 @@ function Player({
     level.collisions
       .map((rectangle) =>
         rectangle.collidesRect(
-          new Rectangle(xPos - speed, yPos - speed, 100, crouching ? 100 : 200)
+          new Rectangle(xPos - speed, yPos - speed, 100, 200)
         )
       )
       .filter((collides) => collides).length > 0;
@@ -75,9 +73,7 @@ function Player({
     yPos,
     level.collisions
       .map((rectangle) =>
-        rectangle.collidesRect(
-          new Rectangle(xPos, yPos + speed, 100, crouching ? 100 : 200)
-        )
+        rectangle.collidesRect(new Rectangle(xPos, yPos + speed, 100, 200))
       )
       .filter((collides) => collides)
   );
