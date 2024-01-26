@@ -44,6 +44,7 @@ function Player({
   const [movingRight, setMovingRight] = useState(false);
   const [crouching, setCrouching] = useState(false);
   const [jumping, setJumping] = useState(false);
+  const [jumpingAllowed, setJumpingAllowed] = useState(true);
   const xPos = xLocation + -environmentOffsetX;
   const yPos = yLocation + -environmentOffsetY;
 
@@ -144,12 +145,17 @@ function Player({
       } else if (yLocation + speed < windowSize.height - 200) {
         setYLocation(yLocation + speed);
       }
+    } else if (!jumpingAllowed) {
+      setJumpingAllowed(true);
     }
   }, [updateTick]);
 
   //jumping
   useEffect(() => {
-    if (keys[" "] === true && !collidesTop) {
+    if (keys[" "] === true && !collidesTop && jumpingAllowed) {
+      setTimeout(() => {
+        setJumpingAllowed(false);
+      }, 300);
       setJumping(true);
       if (yPos > level.height - windowSize.height / 2) {
         setYLocation(yLocation - speed * 2);
