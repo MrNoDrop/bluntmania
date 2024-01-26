@@ -39,19 +39,19 @@ function MainMenuPage({ ctx, updateTick, windowSize }) {
       <ParallaxBackground
         image="/rsc/parallax/forest/layer_03.png"
         direction="right"
-        speed={1}
+        speed={2}
         slowerBy={3}
       />
       <ParallaxBackground
         image="/rsc/parallax/forest/layer_04.png"
         direction="right"
-        speed={2}
+        speed={3}
         slowerBy={3}
       />
       <ParallaxBackground
         image="/rsc/parallax/forest/layer_05.png"
         direction="right"
-        speed={2}
+        speed={3}
         slowerBy={3}
       />
       <Title
