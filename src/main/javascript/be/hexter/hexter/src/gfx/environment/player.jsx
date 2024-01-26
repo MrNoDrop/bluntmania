@@ -42,74 +42,6 @@ function Player({
   const [crouching, setCrouching] = useState(false);
   const [falling, setFalling] = useState(false);
 
-  useHorizontalMovement({
-    setReachedLeftLimit,
-    environmentOffsetX,
-    speed,
-    setReachedRightLimit,
-    level,
-    windowSize,
-    keys,
-    setMovingRight,
-    reachedRightLimit,
-    xLocation,
-    setXLocation,
-    defaultXlocation,
-    movingRight,
-    setMovingLeft,
-    reachedLeftLimit,
-    movingLeft,
-  });
-  useEffect(() => {
-    if (keys.s === true && !crouching) {
-      setCrouching(true);
-    } else if (keys.s === false && crouching) {
-      setCrouching(false);
-    }
-  }, [keys]);
-  if (!falling) {
-    if (movingLeft) {
-      ctx.fillStyle = "red";
-    }
-    if (movingLeft && crouching) {
-      ctx.fillStyle = "orange";
-    }
-    if (movingRight) {
-      ctx.fillStyle = "blue";
-    }
-    if (movingRight && crouching) {
-      ctx.fillStyle = "yellow";
-    }
-    if (!movingLeft && !movingRight && !crouching) {
-      ctx.fillStyle = "grey";
-    }
-    if (!movingLeft && !movingRight && crouching) {
-      ctx.fillStyle = "black";
-    }
-  }
-  ctx.fillRect(xLocation, 0 + windowSize.height / 2, 100, 100);
-
-  return <></>;
-}
-
-function useHorizontalMovement({
-  setReachedLeftLimit,
-  environmentOffsetX,
-  speed,
-  setReachedRightLimit,
-  level,
-  windowSize,
-  keys,
-  setMovingRight,
-  reachedRightLimit,
-  xLocation,
-  setXLocation,
-  defaultXlocation,
-  movingRight,
-  setMovingLeft,
-  reachedLeftLimit,
-  movingLeft,
-}) {
   useEffect(() => {
     setReachedLeftLimit(environmentOffsetX + speed > 0);
     setReachedRightLimit(
@@ -151,5 +83,37 @@ function useHorizontalMovement({
       setMovingLeft(false);
     }
   }, [keys]);
+
+  useEffect(() => {
+    if (keys.s === true && !crouching) {
+      setCrouching(true);
+    } else if (keys.s === false && crouching) {
+      setCrouching(false);
+    }
+  }, [keys]);
+  if (!falling) {
+    if (movingLeft) {
+      ctx.fillStyle = "red";
+    }
+    if (movingLeft && crouching) {
+      ctx.fillStyle = "orange";
+    }
+    if (movingRight) {
+      ctx.fillStyle = "blue";
+    }
+    if (movingRight && crouching) {
+      ctx.fillStyle = "yellow";
+    }
+    if (!movingLeft && !movingRight && !crouching) {
+      ctx.fillStyle = "grey";
+    }
+    if (!movingLeft && !movingRight && crouching) {
+      ctx.fillStyle = "black";
+    }
+  }
+  ctx.fillRect(xLocation, 0 + windowSize.height / 2, 100, 100);
+
+  return <></>;
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(Player);
