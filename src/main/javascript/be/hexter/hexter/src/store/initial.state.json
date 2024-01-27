@@ -8,6 +8,7 @@
     "uiSoundControllerVolume": 1.0,
     "environmentOffsetX": 0,
     "environmentOffsetY": 0,
+    "player": { "xPos": null, "yPos": null },
     "level": {
       "width": 0,
       "height": 0,

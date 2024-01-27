@@ -5,8 +5,10 @@ import setEnvironmentOffsetX from "../../store/actions/set/environmentOffsetX";
 import setEnvironmentOffsetY from "../../store/actions/set/environmentOffsetY";
 import useKeydownListener from "../../hooks/useKeydownListener";
 import { Rectangle } from "../../tools/rectangle";
+import setPlayerPosition from "../../store/actions/set/player/position";
 
 const mapStateToProps = ({ state }) => ({
+  state: state,
   ctx: state.context2D,
   updateTick: state.updateTick,
   windowSize: state.window.inner,
@@ -18,6 +20,8 @@ const mapStateToProps = ({ state }) => ({
 const mapDispatchToProps = (dispatch) => ({
   setEnvironmentOffsetX: (x) => dispatch(setEnvironmentOffsetX(x)),
   setEnvironmentOffsetY: (y) => dispatch(setEnvironmentOffsetY(y)),
+  setPlayerPosition: (state, xPos, yPos) =>
+    dispatch(setPlayerPosition(state, xPos, yPos)),
 });
 
 function Player({
@@ -31,6 +35,8 @@ function Player({
   setEnvironmentOffsetX,
   setEnvironmentOffsetY,
   level,
+  state,
+  setPlayerPosition,
 }) {
   const speed = 3;
   const keys = useKeydownListener();
@@ -76,6 +82,12 @@ function Player({
         )
       )
       .filter((collides) => collides).length > 0;
+
+  // make player position static
+  useEffect(() => {
+    setPlayerPosition(state, xPos, yPos);
+  }, [xPos, yPos]);
+
   // move right
   useEffect(() => {
     setReachedRightLimit(
