@@ -1,4 +1,4 @@
-import { SET_PLAYER_POSITION } from "../types";
+import { SET_PLAYER_POSITION } from "../../types";
 
 const setPlayerPosition = (currentState, xPos, yPos) => ({
   type: SET_PLAYER_POSITION,
